@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class Owner extends User{
+    private Long id;
     private String name;
     private String lastname;
     private String password;
