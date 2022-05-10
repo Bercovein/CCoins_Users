@@ -6,12 +6,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-@Builder
 public class Owner extends User{
     private Long id;
     private String name;
-    private String lastname;
-    private String password;
+
+    @Builder
+    public Owner(String nickName, Long id, String name) {
+        super(nickName);
+        this.id = id;
+        this.name = name;
+    }
 }
