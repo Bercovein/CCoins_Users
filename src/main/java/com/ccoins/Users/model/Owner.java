@@ -1,20 +1,33 @@
 package com.ccoins.Users.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+import java.time.LocalDateTime;
+
 @Data
 @NoArgsConstructor
-public class Owner extends User{
+@Entity
+@Table(name = "owners")
+public class Owner {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private Long id;
-    private String name;
+
+    @Column(name="email")
+    private String email;
+
+    @Column(name="start_date")
+    private LocalDateTime startDate;
 
     @Builder
-    public Owner(String nickName, Long id, String name) {
-        super(nickName);
+    public Owner(Long id, String email, LocalDateTime startDate) {
         this.id = id;
-        this.name = name;
+        this.email = email;
+        this.startDate = startDate;
     }
 }

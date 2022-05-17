@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Client extends User{
-    private String ip;
+public class Client{
+    private String id;
+    private String nickName;
 }
