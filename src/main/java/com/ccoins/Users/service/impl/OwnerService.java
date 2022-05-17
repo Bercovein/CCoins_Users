@@ -1,9 +1,12 @@
 package com.ccoins.Users.service.impl;
 
 import com.ccoins.Users.dto.owner.OwnerDTO;
+import com.ccoins.Users.exceptions.UnauthorizedException;
 import com.ccoins.Users.model.Owner;
 import com.ccoins.Users.repository.IOwnerRepository;
 import com.ccoins.Users.service.IOwnerService;
+import com.ccoins.Users.utils.ErrorUtils;
+import com.ccoins.Users.utils.constant.ExceptionConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +27,15 @@ public class OwnerService implements IOwnerService {
 
         Owner owner;
 
-        ModelMapper mapper = new ModelMapper();
-        owner = mapper.map(ownerDTO, Owner.class);
-        this.ownerRepository.save(owner);
+        try {
+            ModelMapper mapper = new ModelMapper();
+            owner = mapper.map(ownerDTO, Owner.class);
+            this.ownerRepository.save(owner);
+
+        }catch(Exception e){
+            log.error(ErrorUtils.parseMethodError(this.getClass()));
+            throw new UnauthorizedException(ExceptionConstant.USERS_NEW_OWNER_ERROR_CODE, this.getClass(), ExceptionConstant.USERS_NEW_OWNER_ERROR);
+        }
 
     }
 
@@ -35,12 +44,15 @@ public class OwnerService implements IOwnerService {
 
         Optional<Owner> ownerOpt = this.ownerRepository.findByEmail(email);
         Optional<OwnerDTO> response = Optional.empty();
-
-        if(ownerOpt.isPresent()){
-            ModelMapper mapper = new ModelMapper();
-            response = Optional.of(mapper.map(ownerOpt, OwnerDTO.class));
+        try {
+            if(ownerOpt.isPresent()){
+                ModelMapper mapper = new ModelMapper();
+                response = Optional.of(mapper.map(ownerOpt, OwnerDTO.class));
+            }
+            return response;
+        }catch(Exception e){
+            log.error(ErrorUtils.parseMethodError(this.getClass()));
+            throw new UnauthorizedException(ExceptionConstant.USERS_GET_OWNER_BY_EMAIL_ERROR_CODE, this.getClass(), ExceptionConstant.USERS_GET_OWNER_BY_EMAIL_ERROR);
         }
-
-        return response;
     }
 }
