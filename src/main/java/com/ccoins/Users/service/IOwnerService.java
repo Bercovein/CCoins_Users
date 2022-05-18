@@ -8,4 +8,5 @@ public interface IOwnerService {
     void saveOrUpdate(OwnerDTO owner);
 
     Optional<OwnerDTO> findByEmail(String email);
+
 }

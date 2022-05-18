@@ -55,4 +55,5 @@ public class OwnerService implements IOwnerService {
             throw new UnauthorizedException(ExceptionConstant.USERS_GET_OWNER_BY_EMAIL_ERROR_CODE, this.getClass(), ExceptionConstant.USERS_GET_OWNER_BY_EMAIL_ERROR);
         }
     }
+
 }

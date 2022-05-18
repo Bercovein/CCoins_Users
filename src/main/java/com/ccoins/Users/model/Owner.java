@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Data
@@ -19,6 +20,7 @@ public class Owner {
     private Long id;
 
     @Column(name="email")
+    @NotNull
     private String email;
 
     @Column(name="start_date")

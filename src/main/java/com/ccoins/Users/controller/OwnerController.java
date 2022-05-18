@@ -3,7 +3,6 @@ package com.ccoins.Users.controller;
 import com.ccoins.Users.dto.owner.OwnerDTO;
 import com.ccoins.Users.service.IOwnerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -24,4 +23,5 @@ public class OwnerController {
     Optional<OwnerDTO> findByEmail(@PathVariable("email") String email) {
         return this.service.findByEmail(email);
     }
+
 }
