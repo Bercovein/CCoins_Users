@@ -23,15 +23,15 @@ public class OwnerService implements IOwnerService {
 
 
     @Override
-    public void saveOrUpdate(OwnerDTO ownerDTO) {
+    public OwnerDTO saveOrUpdate(OwnerDTO ownerDTO) {
 
         Owner owner;
 
         try {
             ModelMapper mapper = new ModelMapper();
             owner = mapper.map(ownerDTO, Owner.class);
-            this.ownerRepository.save(owner);
-
+            owner = this.ownerRepository.save(owner);
+            return mapper.map(owner, OwnerDTO.class);
         }catch(Exception e){
             log.error(ErrorUtils.parseMethodError(this.getClass()));
             throw new UnauthorizedException(ExceptionConstant.USERS_NEW_OWNER_ERROR_CODE, this.getClass(), ExceptionConstant.USERS_NEW_OWNER_ERROR);

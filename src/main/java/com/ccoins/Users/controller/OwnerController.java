@@ -15,8 +15,8 @@ public class OwnerController {
     private IOwnerService service;
 
     @PostMapping
-    void saveOwner(@RequestBody OwnerDTO owner) {
-        this.service.saveOrUpdate(owner);
+    OwnerDTO saveOwner(@RequestBody OwnerDTO owner) {
+        return this.service.saveOrUpdate(owner);
     }
 
     @GetMapping("/email/{email}")
