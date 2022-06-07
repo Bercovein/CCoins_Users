@@ -1,6 +1,6 @@
 package com.ccoins.Users.service;
 
-import com.ccoins.Users.dto.owner.OwnerDTO;
+import com.ccoins.Users.dto.OwnerDTO;
 
 import java.util.Optional;
 

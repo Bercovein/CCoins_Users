@@ -1,6 +1,6 @@
 package com.ccoins.Users.service.impl;
 
-import com.ccoins.Users.dto.owner.OwnerDTO;
+import com.ccoins.Users.dto.OwnerDTO;
 import com.ccoins.Users.exceptions.UnauthorizedException;
 import com.ccoins.Users.model.Owner;
 import com.ccoins.Users.repository.IOwnerRepository;
@@ -20,7 +20,6 @@ public class OwnerService implements IOwnerService {
 
     @Autowired
     private IOwnerRepository ownerRepository;
-
 
     @Override
     public OwnerDTO saveOrUpdate(OwnerDTO ownerDTO) {
