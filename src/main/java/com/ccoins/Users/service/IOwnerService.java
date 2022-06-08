@@ -1,12 +1,13 @@
 package com.ccoins.Users.service;
 
 import com.ccoins.Users.dto.OwnerDTO;
+import com.ccoins.Users.model.projection.IPOwner;
 
 import java.util.Optional;
 
 public interface IOwnerService {
-    OwnerDTO saveOrUpdate(OwnerDTO owner);
+    IPOwner saveOrUpdate(OwnerDTO owner);
 
-    Optional<OwnerDTO> findByEmail(String email);
+    Optional<IPOwner> findByEmail(String email);
 
 }
