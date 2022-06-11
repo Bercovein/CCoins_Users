@@ -9,12 +9,14 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.ccoins</groupId>
-	<artifactId>Users</artifactId>
+	<artifactId>${app.name}</artifactId>
 	<version>1.0.0</version>
 	<name>Users</name>
 	<description>Demo project for Spring Boot</description>
+	<packaging>war</packaging>
 	<properties>
 		<java.version>11</java.version>
+		<app.name>users-app</app.name>
 		<swagger.version>2.9.2</swagger.version>
 	</properties>
 	<dependencies>
@@ -126,9 +128,16 @@
 			<version>${swagger.version}</version>
 		</dependency>
 
+		<!-- TOMCAT -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
+		<finalName>${app.name}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

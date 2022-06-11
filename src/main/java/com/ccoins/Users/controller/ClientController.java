@@ -1,7 +1,6 @@
 package com.ccoins.Users.controller;
 
 import com.ccoins.Users.dto.ClientDTO;
-import com.ccoins.Users.model.projection.IPClient;
 import com.ccoins.Users.service.IClientService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -19,7 +18,7 @@ public class ClientController {
     private IClientService service;
 
     @PostMapping
-    IPClient save(@RequestBody ClientDTO request) {
+    ClientDTO save(@RequestBody ClientDTO request) {
         return this.service.saveOrUpdate(request);
     }
 
