@@ -13,7 +13,7 @@
 	<version>1.0.0</version>
 	<name>Users</name>
 	<description>Demo project for Spring Boot</description>
-	<packaging>war</packaging>
+<!--	<packaging>war</packaging>-->
 	<properties>
 		<java.version>11</java.version>
 		<app.name>users-app</app.name>
@@ -128,12 +128,12 @@
 			<version>${swagger.version}</version>
 		</dependency>
 
-		<!-- TOMCAT -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<scope>provided</scope>
-		</dependency>
+<!--		&lt;!&ndash; TOMCAT &ndash;&gt;-->
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.boot</groupId>-->
+<!--			<artifactId>spring-boot-starter-tomcat</artifactId>-->
+<!--			<scope>provided</scope>-->
+<!--		</dependency>-->
 	</dependencies>
 
 	<build>
