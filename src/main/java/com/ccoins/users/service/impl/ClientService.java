@@ -1,11 +1,11 @@
 package com.ccoins.users.service.impl;
 
 import com.ccoins.users.dto.ClientDTO;
-import com.ccoins.users.exceptions.UnauthorizedException;
+import com.ccoins.users.exceptions.BadRequestException;
 import com.ccoins.users.model.Client;
 import com.ccoins.users.repository.IClientRepository;
 import com.ccoins.users.service.IClientService;
-import com.ccoins.users.utils.ErrorUtils;
+import com.ccoins.users.utils.DateUtils;
 import com.ccoins.users.utils.MapperUtils;
 import com.ccoins.users.utils.constant.ExceptionConstant;
 import lombok.extern.slf4j.Slf4j;
@@ -34,29 +34,28 @@ public class ClientService implements IClientService {
         try {
             ModelMapper mapper = new ModelMapper();
             client = mapper.map(request, Client.class);
+            client.setStartDate(DateUtils.now());
             client = this.repository.save(client);
             return mapper.map(client,ClientDTO.class);
         }catch(Exception e){
-            log.error(ErrorUtils.parseMethodError(this.getClass()));
-            throw new UnauthorizedException(ExceptionConstant.USERS_NEW_OWNER_ERROR_CODE, this.getClass(), ExceptionConstant.USERS_NEW_OWNER_ERROR);
+            throw new BadRequestException(ExceptionConstant.USERS_NEW_OWNER_ERROR_CODE, this.getClass(), ExceptionConstant.USERS_NEW_OWNER_ERROR);
         }
 
     }
 
     @Override
-    public Optional<ClientDTO> findActiveById(Long id) {
+    public Optional<ClientDTO> findActiveByIp(String id) {
 
         Optional<Client> client;
         ClientDTO clientDTO = null;
         try {
-            client = this.repository.findByIdAndActive(id,true);
+            client = this.repository.findByIpAndActive(id,true);
             if(client.isPresent()){
                 clientDTO = (ClientDTO)MapperUtils.map(client, ClientDTO.class);
             }
-            return Optional.of(clientDTO);
+            return Optional.ofNullable(clientDTO);
         }catch(Exception e){
-            log.error(ErrorUtils.parseMethodError(this.getClass()));
-            throw new UnauthorizedException(ExceptionConstant.USERS_GET_OWNER_BY_EMAIL_ERROR_CODE, this.getClass(), ExceptionConstant.USERS_GET_OWNER_BY_EMAIL_ERROR);
+            throw new BadRequestException(ExceptionConstant.USERS_GET_OWNER_BY_EMAIL_ERROR_CODE, this.getClass(), ExceptionConstant.USERS_GET_OWNER_BY_EMAIL_ERROR);
         }
     }
 

@@ -15,23 +15,26 @@ import static com.ccoins.users.utils.DateUtils.AUTO_DATE;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Entity(name="Client")
-@Table(name = "clients")
+@Entity
+@Table(name = "CLIENTS")
 public class Client{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name="ID")
     private Long id;
 
-    @Column(name="NICK_NAME", unique = true)
+    @Column(name="IP")
+    private String ip;
+
+    @Column(name="NICK_NAME")
     @NotEmpty
     private String nickName;
 
-    @Column(name="active", columnDefinition = "boolean default true")
+    @Column(name="ACTIVE", columnDefinition = "boolean default true")
     private boolean active;
 
-    @Column(name="start_date",insertable = false, updatable = false,
+    @Column(name="START_DATE",insertable = false, updatable = false,
             columnDefinition = AUTO_DATE)
     private LocalDateTime startDate;
 

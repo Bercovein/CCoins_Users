@@ -9,7 +9,7 @@ import java.util.Optional;
 @Repository
 public interface IClientRepository extends JpaRepository<Client, Long> {
 
-    Optional<Client> findByIdAndActive(Long id, boolean bol);
+    Optional<Client> findByIpAndActive(String ip, boolean bol);
 
     Client save(Client request);
 }

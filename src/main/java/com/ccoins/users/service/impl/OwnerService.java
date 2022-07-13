@@ -1,11 +1,10 @@
 package com.ccoins.users.service.impl;
 
 import com.ccoins.users.dto.OwnerDTO;
-import com.ccoins.users.exceptions.UnauthorizedException;
+import com.ccoins.users.exceptions.BadRequestException;
 import com.ccoins.users.model.Owner;
 import com.ccoins.users.repository.IOwnerRepository;
 import com.ccoins.users.service.IOwnerService;
-import com.ccoins.users.utils.ErrorUtils;
 import com.ccoins.users.utils.constant.ExceptionConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -32,8 +31,7 @@ public class OwnerService implements IOwnerService {
             owner = this.ownerRepository.save(owner);
             return mapper.map(owner, OwnerDTO.class);
         }catch(Exception e){
-            log.error(ErrorUtils.parseMethodError(this.getClass()));
-            throw new UnauthorizedException(ExceptionConstant.USERS_NEW_OWNER_ERROR_CODE, this.getClass(), ExceptionConstant.USERS_NEW_OWNER_ERROR);
+            throw new BadRequestException(ExceptionConstant.USERS_NEW_OWNER_ERROR_CODE, this.getClass(), ExceptionConstant.USERS_NEW_OWNER_ERROR);
         }
 
     }
@@ -50,8 +48,7 @@ public class OwnerService implements IOwnerService {
             }
             return response;
         }catch(Exception e){
-            log.error(ErrorUtils.parseMethodError(this.getClass()));
-            throw new UnauthorizedException(ExceptionConstant.USERS_GET_OWNER_BY_EMAIL_ERROR_CODE, this.getClass(), ExceptionConstant.USERS_GET_OWNER_BY_EMAIL_ERROR);
+            throw new BadRequestException(ExceptionConstant.USERS_GET_OWNER_BY_EMAIL_ERROR_CODE, this.getClass(), ExceptionConstant.USERS_GET_OWNER_BY_EMAIL_ERROR);
         }
     }
 
