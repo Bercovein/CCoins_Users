@@ -6,6 +6,7 @@ import com.ccoins.users.service.IClientService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -28,6 +29,12 @@ public class ClientController {
     @GetMapping("/ip/{id}")
     Optional<IPClient> findByIp(@PathVariable("id") String ip) {
         return this.service.findActiveByIp(ip);
+    }
+
+    @PutMapping("/name")
+    @ResponseStatus(HttpStatus.CREATED)
+    void updateName(@RequestBody ClientDTO request) {
+        this.service.updateName(request);
     }
 
 }

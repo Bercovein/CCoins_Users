@@ -8,6 +8,8 @@ public class ExceptionConstant {
     public static final String CREATE_NEW_ERROR_LABEL = ERROR_LABEL.concat("create new ");
     public static final String FIND_ERROR_LABEL = ERROR_LABEL.concat("find ");
 
+    public static final String UPDATE_ERROR_LABEL = ERROR_LABEL.concat("update ");
+
     //ERRORS
     public static final String GENERIC_ERROR_CODE = "0001";
     public static final String GENERIC_ERROR = "Something went wrong! Check with your administrator";
@@ -21,5 +23,8 @@ public class ExceptionConstant {
 
     public static final String USERS_FIND_OWNER_BY_EMAIL_ERROR_CODE = "0004";
     public static final String USERS_FIND_OWNER_BY_EMAIL_ERROR = FIND_ERROR_LABEL.concat("owner by email");
+
+    public static final String UPDATE_CLIENT_NAME_ERROR_CODE = "0005";
+    public static final String UPDATE_CLIENT_NAME_ERROR = UPDATE_ERROR_LABEL.concat("client nickname");
 
 }

@@ -9,4 +9,6 @@ public interface IClientService {
     ClientDTO saveOrUpdate(ClientDTO request);
 
     Optional<IPClient> findActiveByIp(String id);
+
+    void updateName(ClientDTO request);
 }
