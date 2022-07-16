@@ -3,10 +3,10 @@ package com.ccoins.users.service.impl;
 import com.ccoins.users.dto.ClientDTO;
 import com.ccoins.users.exceptions.BadRequestException;
 import com.ccoins.users.model.Client;
+import com.ccoins.users.model.projections.IPClient;
 import com.ccoins.users.repository.IClientRepository;
 import com.ccoins.users.service.IClientService;
 import com.ccoins.users.utils.DateUtils;
-import com.ccoins.users.utils.MapperUtils;
 import com.ccoins.users.utils.constant.ExceptionConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -44,16 +44,10 @@ public class ClientService implements IClientService {
     }
 
     @Override
-    public Optional<ClientDTO> findActiveByIp(String id) {
+    public Optional<IPClient> findActiveByIp(String id) {
 
-        Optional<Client> client;
-        ClientDTO clientDTO = null;
         try {
-            client = this.repository.findByIpAndActive(id,true);
-            if(client.isPresent()){
-                clientDTO = (ClientDTO)MapperUtils.map(client, ClientDTO.class);
-            }
-            return Optional.ofNullable(clientDTO);
+            return this.repository.findByIp(id);
         }catch(Exception e){
             throw new BadRequestException(ExceptionConstant.USERS_GET_OWNER_BY_EMAIL_ERROR_CODE, this.getClass(), ExceptionConstant.USERS_GET_OWNER_BY_EMAIL_ERROR);
         }
