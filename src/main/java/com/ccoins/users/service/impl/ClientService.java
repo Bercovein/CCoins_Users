@@ -7,12 +7,15 @@ import com.ccoins.users.model.projections.IPClient;
 import com.ccoins.users.repository.IClientRepository;
 import com.ccoins.users.service.IClientService;
 import com.ccoins.users.utils.DateUtils;
+import com.ccoins.users.utils.MapperUtils;
 import com.ccoins.users.utils.constant.ExceptionConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -44,10 +47,14 @@ public class ClientService implements IClientService {
     }
 
     @Override
-    public Optional<IPClient> findActiveByIp(String id) {
-
+    public Optional<IPClient> findActiveById(Long id) {
+        Optional<IPClient> ipClient = Optional.empty();
         try {
-            return this.repository.findByIp(id);
+            Optional<Client> client = this.repository.findById(id);
+            if(client.isPresent()){
+                ipClient = Optional.ofNullable((IPClient)MapperUtils.map(client.get(), IPClient.class));
+            }
+            return ipClient;
         }catch(Exception e){
             throw new BadRequestException(ExceptionConstant.USERS_GET_OWNER_BY_EMAIL_ERROR_CODE, this.getClass(), ExceptionConstant.USERS_GET_OWNER_BY_EMAIL_ERROR);
         }
@@ -56,10 +63,23 @@ public class ClientService implements IClientService {
     @Override
     public void updateName(ClientDTO request) {
         try {
-            this.repository.updateNickNameByIp(request.getNickName(), request.getIp());
+            this.repository.updateNickNameById(request.getNickName(), request.getId());
         }catch(Exception e){
             throw new BadRequestException(ExceptionConstant.UPDATE_CLIENT_NAME_ERROR_CODE,
                     this.getClass(), ExceptionConstant.UPDATE_CLIENT_NAME_ERROR);
+        }
+    }
+
+    @Override
+    public List<ClientDTO> findByIdIn(List<Long> list) {
+        try {
+            List<Client> clients = this.repository.findByIdIn(list);
+            List<ClientDTO> response = new ArrayList<>();
+            clients.forEach(c -> response.add((ClientDTO) MapperUtils.map(c,ClientDTO.class)));
+            return response;
+        }catch(Exception e){
+            throw new BadRequestException(ExceptionConstant.CLIENT_GET_LIST_ERROR_CODE,
+                    this.getClass(), ExceptionConstant.CLIENT_GET_LIST_ERROR);
         }
     }
 

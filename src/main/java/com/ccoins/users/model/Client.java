@@ -20,7 +20,6 @@ import static com.ccoins.users.utils.DateUtils.AUTO_DATE;
 public class Client{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="ID")
     private Long id;
 

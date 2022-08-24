@@ -27,4 +27,7 @@ public class ExceptionConstant {
     public static final String UPDATE_CLIENT_NAME_ERROR_CODE = "0005";
     public static final String UPDATE_CLIENT_NAME_ERROR = UPDATE_ERROR_LABEL.concat("client nickname");
 
+    public static final String CLIENT_GET_LIST_ERROR_CODE = "0006";
+    public static final String CLIENT_GET_LIST_ERROR = GET_ERROR_LABEL.concat("clients by list");
+
 }

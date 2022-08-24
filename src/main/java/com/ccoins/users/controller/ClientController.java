@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -27,8 +28,8 @@ public class ClientController {
     @ApiOperation(value = "Find by id",
             notes = "Find a client by ip")
     @GetMapping("/ip/{id}")
-    Optional<IPClient> findByIp(@PathVariable("id") String ip) {
-        return this.service.findActiveByIp(ip);
+    Optional<IPClient> findByIp(@PathVariable("id") Long ip) {
+        return this.service.findActiveById(ip);
     }
 
     @PutMapping("/name")
@@ -37,4 +38,8 @@ public class ClientController {
         this.service.updateName(request);
     }
 
+    @PostMapping("/list")
+    List<ClientDTO> findByIdIn(@RequestBody List<Long> list){
+        return this.service.findByIdIn(list);
+    }
 }
