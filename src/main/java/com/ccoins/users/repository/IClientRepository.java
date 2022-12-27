@@ -16,6 +16,8 @@ public interface IClientRepository extends JpaRepository<Client, Long> {
 
     Optional<Client> findById(Long id);
 
+    Optional<Client> findByIp(String ip);
+    
     Client save(Client request);
 
 

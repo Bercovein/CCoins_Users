@@ -3,7 +3,6 @@ package com.ccoins.users.service.impl;
 import com.ccoins.users.dto.ClientDTO;
 import com.ccoins.users.exceptions.BadRequestException;
 import com.ccoins.users.model.Client;
-import com.ccoins.users.model.projections.IPClient;
 import com.ccoins.users.repository.IClientRepository;
 import com.ccoins.users.service.IClientService;
 import com.ccoins.users.utils.DateUtils;
@@ -47,14 +46,28 @@ public class ClientService implements IClientService {
     }
 
     @Override
-    public Optional<IPClient> findActiveById(Long id) {
-        Optional<IPClient> ipClient = Optional.empty();
+    public Optional<ClientDTO> findActiveByIp(String ip) {
+        Optional<ClientDTO> clientDto = Optional.empty();
+        try {
+            Optional<Client> client = this.repository.findByIp(ip);
+            if(client.isPresent()){
+                clientDto = Optional.ofNullable((ClientDTO)MapperUtils.map(client.get(), ClientDTO.class));
+            }
+            return clientDto;
+        }catch(Exception e){
+            throw new BadRequestException(ExceptionConstant.USERS_GET_OWNER_BY_EMAIL_ERROR_CODE, this.getClass(), ExceptionConstant.USERS_GET_OWNER_BY_EMAIL_ERROR);
+        }
+    }
+
+    @Override
+    public Optional<ClientDTO> findActiveById(Long id) {
+        Optional<ClientDTO> clientDto = Optional.empty();
         try {
             Optional<Client> client = this.repository.findById(id);
             if(client.isPresent()){
-                ipClient = Optional.ofNullable((IPClient)MapperUtils.map(client.get(), IPClient.class));
+                clientDto = Optional.ofNullable((ClientDTO)MapperUtils.map(client.get(), ClientDTO.class));
             }
-            return ipClient;
+            return clientDto;
         }catch(Exception e){
             throw new BadRequestException(ExceptionConstant.USERS_GET_OWNER_BY_EMAIL_ERROR_CODE, this.getClass(), ExceptionConstant.USERS_GET_OWNER_BY_EMAIL_ERROR);
         }
