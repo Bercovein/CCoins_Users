@@ -25,11 +25,11 @@ public class ClientController {
         return this.service.saveOrUpdate(request);
     }
 
-    @ApiOperation(value = "Find by id",
+    @ApiOperation(value = "Find by ip",
             notes = "Find a client by ip")
-    @GetMapping("/ip/{id}")
-    Optional<IPClient> findByIp(@PathVariable("id") Long ip) {
-        return this.service.findActiveById(ip);
+    @GetMapping("/ip/{ip}")
+    Optional<ClientDTO> findByIp(@PathVariable("ip") String ip) {
+    return this.service.findActiveByIp(ip);
     }
 
     @PutMapping("/name")
