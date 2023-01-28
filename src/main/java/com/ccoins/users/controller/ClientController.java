@@ -1,10 +1,7 @@
 package com.ccoins.users.controller;
 
 import com.ccoins.users.dto.ClientDTO;
-import com.ccoins.users.model.projections.IPClient;
 import com.ccoins.users.service.IClientService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +11,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/client")
-@Api(tags = "Client")
 public class ClientController {
 
     @Autowired
@@ -25,8 +21,6 @@ public class ClientController {
         return this.service.saveOrUpdate(request);
     }
 
-    @ApiOperation(value = "Find by ip",
-            notes = "Find a client by ip")
     @GetMapping("/ip/{ip}")
     Optional<ClientDTO> findByIp(@PathVariable("ip") String ip) {
     return this.service.findActiveByIp(ip);

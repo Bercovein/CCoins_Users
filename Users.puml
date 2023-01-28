@@ -1,0 +1,24 @@
+@startuml
+class OwnerController {
+}
+class ClientService {
+}
+interface IClientService {
+}
+interface IClientRepository {
+}
+interface IOwnerRepository {
+}
+class ClientController {
+}
+interface IOwnerService {
+}
+class OwnerService {
+}
+
+
+IClientService <|.. ClientService
+JpaRepository <|-- IClientRepository
+JpaRepository <|-- IOwnerRepository
+IOwnerService <|.. OwnerService
+@enduml
