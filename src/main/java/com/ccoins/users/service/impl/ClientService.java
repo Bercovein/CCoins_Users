@@ -37,6 +37,7 @@ public class ClientService implements IClientService {
             ModelMapper mapper = new ModelMapper();
             client = mapper.map(request, Client.class);
             client.setStartDate(DateUtils.now());
+            client.setActive(true);
             client = this.repository.save(client);
             return mapper.map(client,ClientDTO.class);
         }catch(Exception e){
@@ -96,4 +97,17 @@ public class ClientService implements IClientService {
         }
     }
 
+    @Override
+    public List<ClientDTO> findByParty(Long partyId){
+
+        try{
+            List<Client> clients = this.repository.findByParty(partyId);
+            List<ClientDTO> response = new ArrayList<>();
+            clients.forEach(c -> response.add((ClientDTO) MapperUtils.map(c,ClientDTO.class)));
+            return response;
+        }catch(Exception e){
+            throw new BadRequestException(ExceptionConstant.CLIENT_GET_BY_PARTY_ERROR_CODE,
+                    this.getClass(), ExceptionConstant.CLIENT_GET_BY_PARTY_ERROR);
+        }
+    }
 }

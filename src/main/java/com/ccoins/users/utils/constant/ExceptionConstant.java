@@ -30,4 +30,7 @@ public class ExceptionConstant {
     public static final String CLIENT_GET_LIST_ERROR_CODE = "0006";
     public static final String CLIENT_GET_LIST_ERROR = GET_ERROR_LABEL.concat("clients by list");
 
+    public static final String CLIENT_GET_BY_PARTY_ERROR_CODE = "0007";
+    public static final String CLIENT_GET_BY_PARTY_ERROR = GET_ERROR_LABEL.concat("clients by party");
+
 }

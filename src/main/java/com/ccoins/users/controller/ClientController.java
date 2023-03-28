@@ -4,6 +4,7 @@ import com.ccoins.users.dto.ClientDTO;
 import com.ccoins.users.service.IClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,5 +36,10 @@ public class ClientController {
     @PostMapping("/list")
     List<ClientDTO> findByIdIn(@RequestBody List<Long> list){
         return this.service.findByIdIn(list);
+    }
+
+    @GetMapping("/party/{partyId}")
+    ResponseEntity<List<ClientDTO>> findByParty(@PathVariable("partyId") Long partyId) {
+        return ResponseEntity.ok(this.service.findByParty(partyId));
     }
 }

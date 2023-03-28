@@ -15,4 +15,6 @@ public interface IClientService {
     void updateName(ClientDTO request);
 
     List<ClientDTO> findByIdIn(List<Long> list);
+
+    List<ClientDTO> findByParty(Long partyId);
 }

@@ -4,6 +4,7 @@ import com.ccoins.users.model.Client;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,4 +28,9 @@ public interface IClientRepository extends JpaRepository<Client, Long> {
     void updateNickNameById(String nickName, Long id);
 
     List<Client> findByIdIn(List<Long> list);
+
+    @Query(value = "select c.* from clients c " +
+            "inner join clients_parties cp on cp.fk_client = c.id " +
+            "where cp.FK_PARTY = :partyId",nativeQuery = true)
+    List<Client> findByParty(@Param("partyId") Long partyId);
 }
