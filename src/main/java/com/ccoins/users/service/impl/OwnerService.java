@@ -1,6 +1,7 @@
 package com.ccoins.users.service.impl;
 
 import com.ccoins.users.dto.OwnerDTO;
+import com.ccoins.users.dto.RefreshTokenDTO;
 import com.ccoins.users.exceptions.BadRequestException;
 import com.ccoins.users.model.Owner;
 import com.ccoins.users.repository.IOwnerRepository;
@@ -9,6 +10,7 @@ import com.ccoins.users.utils.constant.ExceptionConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -52,4 +54,34 @@ public class OwnerService implements IOwnerService {
         }
     }
 
+    @Override
+    public ResponseEntity<RefreshTokenDTO> getSpotifyRefreshTokenByOwnerId(Long id) {
+
+        Optional<Owner> ownerOpt;
+        RefreshTokenDTO response = RefreshTokenDTO.builder().refreshToken(null).build();
+
+        try {
+            ownerOpt = this.ownerRepository.findById(id);
+        }catch(Exception e){
+            return ResponseEntity.ok(response);
+        }
+
+        if(ownerOpt.isPresent()){
+            Owner owner = ownerOpt.get();
+            response.setRefreshToken(owner.getRefreshTokenSPTF());
+        }
+
+        return ResponseEntity.ok(response);
+    }
+
+    @Override
+    public void saveOrUpdateRefreshTokenSpotify(Long id, RefreshTokenDTO request) {
+
+        try{
+            this.ownerRepository.updateRefreshTokenSpotify(id, request.getRefreshToken());
+        }catch(Exception e){
+            throw new BadRequestException(ExceptionConstant.SPOTIFY_REFRESH_TOKEN_UPDATE_ERROR_CODE,
+                    this.getClass(), ExceptionConstant.SPOTIFY_REFRESH_TOKEN_UPDATE_ERROR);
+        }
+    }
 }

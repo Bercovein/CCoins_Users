@@ -23,13 +23,17 @@ public class Owner {
     @NotNull
     private String email;
 
+    @Column(name="sptf_refresh_token")
+    private String refreshTokenSPTF;
+
     @Column(name="start_date")
     private LocalDateTime startDate;
 
     @Builder
-    public Owner(Long id, String email, LocalDateTime startDate) {
+    public Owner(Long id, String email, LocalDateTime startDate, String refreshTokenSPTF) {
         this.id = id;
         this.email = email;
         this.startDate = startDate;
+        this.refreshTokenSPTF = refreshTokenSPTF;
     }
 }
