@@ -77,7 +77,7 @@ public class ClientService implements IClientService {
     @Override
     public void updateName(ClientDTO request) {
         try {
-            this.repository.updateNickNameById(request.getNickName(), request.getId());
+            this.repository.updateNickNameById(request.getNickName(), request.getIp());
         }catch(Exception e){
             throw new BadRequestException(ExceptionConstant.UPDATE_CLIENT_NAME_ERROR_CODE,
                     this.getClass(), ExceptionConstant.UPDATE_CLIENT_NAME_ERROR);

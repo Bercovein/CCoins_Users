@@ -24,8 +24,8 @@ public interface IClientRepository extends JpaRepository<Client, Long> {
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE Client c SET c.nickName = :nickName WHERE c.id = :id")
-    void updateNickNameById(String nickName, Long id);
+    @Query(value = "UPDATE Client c SET c.nickName = :nickName WHERE c.ip = :ip")
+    void updateNickNameById(@Param("nickName") String nickName,@Param("ip") String ip);
 
     List<Client> findByIdIn(List<Long> list);
 
