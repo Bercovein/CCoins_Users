@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Optional;
 
-@Api(tags = "Client")
+@Api(tags = "Owner")
 public interface IOwnerController {
+
 
     @ApiOperation(value = "Save owner")
     OwnerDTO save(@RequestBody OwnerDTO owner);
 
-    @ApiOperation(value = "Find by email",
-            notes = "Find a owner by email")
+    @ApiOperation(value = "Find by email")
     Optional<OwnerDTO> findByEmail(@PathVariable("email") String email);
 
     @ApiOperation(value = "Find refresh_token by owner id",
@@ -28,3 +28,4 @@ public interface IOwnerController {
             notes = "Updates spotify refresh token from one owner by id")
     void saveOrUpdateRefreshTokenSpotify(@PathVariable("id") Long id, @RequestBody RefreshTokenDTO request);
 }
+

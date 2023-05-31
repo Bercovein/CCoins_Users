@@ -7,6 +7,9 @@ import java.util.List;
 
 public class MapperUtils {
 
+    private MapperUtils() {
+    }
+
     public static Object map(Object obj, Class<?> cla){
         ModelMapper mapper =  new ModelMapper();
         return mapper.map(obj,cla);

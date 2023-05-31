@@ -19,8 +19,12 @@ import java.util.Optional;
 @Slf4j
 public class OwnerService implements IOwnerService {
 
+    private final IOwnerRepository ownerRepository;
+
     @Autowired
-    private IOwnerRepository ownerRepository;
+    public OwnerService(IOwnerRepository ownerRepository) {
+        this.ownerRepository = ownerRepository;
+    }
 
     @Override
     public OwnerDTO saveOrUpdate(OwnerDTO ownerDTO) {
@@ -41,9 +45,10 @@ public class OwnerService implements IOwnerService {
     @Override
     public Optional<OwnerDTO> findByEmail(String email) {
 
-        Optional<Owner> ownerOpt = this.ownerRepository.findByEmail(email);
-        Optional<OwnerDTO> response = Optional.empty();
         try {
+            Optional<Owner> ownerOpt = this.ownerRepository.findByEmail(email);
+            Optional<OwnerDTO> response = Optional.empty();
+
             if(ownerOpt.isPresent()){
                 ModelMapper mapper = new ModelMapper();
                 response = Optional.of(mapper.map(ownerOpt, OwnerDTO.class));

@@ -17,26 +17,34 @@ import java.util.Optional;
 @Api(tags = "Owner")
 public class OwnerController implements IOwnerController {
 
+    private final IOwnerService service;
+
     @Autowired
-    private IOwnerService service;
+    public OwnerController(IOwnerService service) {
+        this.service = service;
+    }
 
     @PostMapping
+    @Override
     public OwnerDTO save(@RequestBody OwnerDTO owner) {
         return this.service.saveOrUpdate(owner);
     }
 
     @GetMapping("/email/{email}")
+    @Override
     public Optional<OwnerDTO> findByEmail(@PathVariable("email") String email) {
         return this.service.findByEmail(email);
     }
 
     @GetMapping("/{id}")
+    @Override
     public ResponseEntity<RefreshTokenDTO> getSpotifyRefreshTokenByOwnerId(@PathVariable("id") Long id){
         return this.service.getSpotifyRefreshTokenByOwnerId(id);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
+    @Override
     public void saveOrUpdateRefreshTokenSpotify(@PathVariable("id") Long id, @RequestBody RefreshTokenDTO request){
         this.service.saveOrUpdateRefreshTokenSpotify(id, request);
     }
