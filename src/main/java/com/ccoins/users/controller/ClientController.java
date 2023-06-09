@@ -52,4 +52,10 @@ public class ClientController implements IClientController {
     public ResponseEntity<List<ClientDTO>> findByParty(@PathVariable("partyId") Long partyId) {
         return ResponseEntity.ok(this.service.findByParty(partyId));
     }
+
+    @GetMapping("/party/{partyId}/active")
+    @Override
+    public ResponseEntity<List<ClientDTO>> findActivesByParty(@PathVariable("partyId") Long partyId) {
+        return ResponseEntity.ok(this.service.findActivesByParty(partyId));
+    }
 }

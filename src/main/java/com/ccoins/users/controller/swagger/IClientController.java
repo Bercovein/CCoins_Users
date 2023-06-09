@@ -4,6 +4,7 @@ import com.ccoins.users.dto.ClientDTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -28,4 +29,7 @@ public interface IClientController {
 
     @ApiOperation(value = "Find clients by party id")
     ResponseEntity<List<ClientDTO>> findByParty(@PathVariable("partyId") Long partyId);
+
+    @GetMapping("/party/{partyId}/active")
+    ResponseEntity<List<ClientDTO>> findActivesByParty(@PathVariable("partyId") Long partyId);
 }

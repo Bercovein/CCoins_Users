@@ -36,4 +36,7 @@ public class ExceptionConstant {
     public static final String SPOTIFY_REFRESH_TOKEN_UPDATE_ERROR_CODE = "0008";
     public static final String SPOTIFY_REFRESH_TOKEN_UPDATE_ERROR = UPDATE_ERROR_LABEL.concat("owner spotify refresh token.");
 
+    public static final String CLIENT_GET_ACTIVE_BY_PARTY_ERROR_CODE = "0009";
+    public static final String CLIENT_GET_ACTIVE_BY_PARTY_ERROR = GET_ERROR_LABEL.concat("active clients by party");
+
 }

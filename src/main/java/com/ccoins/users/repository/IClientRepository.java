@@ -33,4 +33,10 @@ public interface IClientRepository extends JpaRepository<Client, Long> {
             "inner join clients_parties cp on cp.fk_client = c.id " +
             "where cp.FK_PARTY = :partyId",nativeQuery = true)
     List<Client> findByParty(@Param("partyId") Long partyId);
+
+    @Query(value = "select c.* from clients c " +
+            "inner join clients_parties cp on cp.fk_client = c.id " +
+            "where cp.FK_PARTY = :partyId" +
+            " and cp.active is true",nativeQuery = true)
+    List<Client> findActiveByParty(@Param("partyId") Long partyId);
 }

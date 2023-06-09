@@ -17,4 +17,6 @@ public interface IClientService {
     List<ClientDTO> findByIdIn(List<Long> list);
 
     List<ClientDTO> findByParty(Long partyId);
+
+    List<ClientDTO> findActivesByParty(Long partyId);
 }
